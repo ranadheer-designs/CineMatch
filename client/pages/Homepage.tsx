@@ -54,11 +54,20 @@ export default function Homepage() {
         body: JSON.stringify({ imageUrl, apiKey }),
       });
 
+            // Try to parse response as JSON, handle parsing errors gracefully
+      let data: any;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        console.error("Failed to parse response as JSON:", jsonError);
+        throw new Error("Invalid response from server. Please try again.");
+      }
+
       if (!response.ok) {
-        const errorData = await response.json();
         const errorMessage =
-          errorData.details?.message ||
-          errorData.details ||
+          data.details?.message ||
+          data.details ||
+          data.error ||
           "Failed to analyze image";
 
         // Check for rate limiting
@@ -67,12 +76,11 @@ export default function Homepage() {
           errorMessage.includes("RESOURCE_EXHAUSTED")
         ) {
           throw new Error(
-            "API rate limit reached. Please wait a moment and try again.",
+            "API rate limit reached. Please wait a moment and try again."
           );
         }
 
         throw new Error(errorMessage);
-      }
 
       const data: AnalysisResponse = await response.json();
       clearInterval(messageInterval);
