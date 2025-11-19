@@ -137,9 +137,26 @@ Return ONLY valid JSON, no markdown code blocks.`;
       
     const data = (await response.json()) as GoogleGenerativeAIResponse;
     const analysisText =
-      data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+      
+    // Clean up markdown code blocks if present
+    let cleanedText = analysisText.trim();
+    
+    // Remove markdown code block syntax (```json ... ``` or ``` ... ```)
+    if (cleanedText.startsWith('```')) {
+      cleanedText = cleanedText.replace(/^```(?:json)?\s*\n/, '').replace(/\n```\s*$/, '');
+    }
+    
+    // Try to parse the JSON
+    let analysis: CinematographyAnalysis;
+    try {
+      analysis = JSON.parse(cleanedText);
+    } catch (parseError) {
+      console.error('Failed to parse Gemini response:', cleanedText);
+      throw new Error('Gemini returned invalid JSON format');
+    }
 
-    const analysis: CinematographyAnalysis = JSON.parse(analysisText);
+
+
 
     const result: AnalysisResponse = {
       id: Date.now().toString(),
