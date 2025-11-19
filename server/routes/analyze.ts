@@ -73,12 +73,6 @@ export const handleAnalyzeShot: RequestHandler = async (req, res) => {
 
 Return ONLY valid JSON, no markdown code blocks.`;
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      res.status(500).json({ error: "GEMINI_API_KEY not configured" });
-      return;
-    }
-
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
       {
