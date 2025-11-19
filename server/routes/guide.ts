@@ -13,10 +13,15 @@ interface GoogleGenerativeAIResponse {
 
 export const handleGenerateGuide: RequestHandler = async (req, res) => {
   try {
-    const { analysis, userEquipment = "basic DSLR setup" } = req.body;
+    const { analysis, apiKey, userEquipment = "basic DSLR setup" } = req.body;
 
     if (!analysis) {
       res.status(400).json({ error: "analysis is required" });
+      return;
+    }
+
+    if (!apiKey) {
+      res.status(400).json({ error: "apiKey is required" });
       return;
     }
 
