@@ -105,12 +105,26 @@ Return ONLY valid JSON, no markdown code blocks.`;
     );
 
     if (!response.ok) {
-      const error = await response.json();
+      // Try to parse error response as JSON, fallback to text
+      let error: any;
+      const contentType = response.headers.get("content-type");
+      
+      try {
+        if (contentType?.includes("application/json")) {
+          error = await response.json();
+        } else {
+          const errorText = await response.text();
+          error = { message: errorText };
+        }
+      } catch (parseError) {
+        error = { message: "Failed to parse error response" };
+      }
+      
       console.error("Gemini API error:", error);
-
+      
       const errorMessage =
         error.error?.message || error.message || "Failed to analyze image";
-
+      
       res.status(response.status).json({
         error: "Failed to analyze image",
         details: {
@@ -120,7 +134,7 @@ Return ONLY valid JSON, no markdown code blocks.`;
       });
       return;
     }
-
+      
     const data = (await response.json()) as GoogleGenerativeAIResponse;
     const analysisText =
       data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
