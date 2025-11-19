@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Film, Sparkles, Zap } from "lucide-react";
+import { Film, Sparkles, Zap, Settings } from "lucide-react";
 import ImageUploader from "@/components/ImageUploader";
+import APIKeyModal from "@/components/APIKeyModal";
+import { useApiKey } from "@/hooks/useApiKey";
 import { AnalysisResponse } from "@shared/api";
 
 const LOADING_MESSAGES = [
@@ -15,9 +17,11 @@ const LOADING_MESSAGES = [
 
 export default function Homepage() {
   const navigate = useNavigate();
+  const { apiKey, setApiKey, hasKey } = useApiKey();
   const [isLoading, setIsLoading] = useState(false);
   const [loadingStatus, setLoadingStatus] = useState(LOADING_MESSAGES[0]);
   const [messageIndex, setMessageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Cycle through loading messages
   const cycleMessages = () => {
