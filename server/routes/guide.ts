@@ -74,12 +74,6 @@ Create a detailed, step-by-step recreation guide with:
 
 Format as markdown with clear headers. Be practical and specific.`;
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      res.status(500).json({ error: "GEMINI_API_KEY not configured" });
-      return;
-    }
-
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
       {
