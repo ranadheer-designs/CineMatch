@@ -41,7 +41,15 @@ export default function Homepage() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to analyze image");
+        const errorData = await response.json();
+        const errorMessage = errorData.details?.message || errorData.details || "Failed to analyze image";
+
+        // Check for rate limiting
+        if (errorMessage.includes("429") || errorMessage.includes("RESOURCE_EXHAUSTED")) {
+          throw new Error("API rate limit reached. Please wait a moment and try again.");
+        }
+
+        throw new Error(errorMessage);
       }
 
       const data: AnalysisResponse = await response.json();
@@ -53,8 +61,9 @@ export default function Homepage() {
     } catch (error) {
       clearInterval(messageInterval);
       setIsLoading(false);
-      console.error("Analysis error:", error);
-      alert("Failed to analyze image. Please try again.");
+      const errorMsg = error instanceof Error ? error.message : "Failed to analyze image";
+      console.error("Analysis error:", errorMsg);
+      alert(`Analysis failed: ${errorMsg}`);
     }
   };
 
