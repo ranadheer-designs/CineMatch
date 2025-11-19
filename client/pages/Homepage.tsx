@@ -94,12 +94,28 @@ export default function Homepage() {
               CINEMATCH AI
             </h1>
           </div>
-          <button
-            onClick={() => navigate("/library")}
-            className="px-6 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all font-semibold hover:shadow-lg hover:shadow-primary/20"
-          >
-            Browse Library
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className={`p-2 rounded-lg transition-all font-semibold flex items-center gap-2 ${
+                hasKey
+                  ? "bg-primary/20 text-primary hover:bg-primary/30"
+                  : "bg-secondary/20 text-secondary hover:bg-secondary/30"
+              }`}
+              title={hasKey ? "API Key configured" : "Configure API Key"}
+            >
+              <Settings className="w-5 h-5" />
+              <span className="text-sm hidden sm:inline">
+                {hasKey ? "API Key Set" : "Setup API Key"}
+              </span>
+            </button>
+            <button
+              onClick={() => navigate("/library")}
+              className="px-6 py-2 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-all font-semibold hover:shadow-lg hover:shadow-primary/20"
+            >
+              Browse Library
+            </button>
+          </div>
         </div>
       </header>
 
