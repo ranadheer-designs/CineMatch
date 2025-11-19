@@ -108,7 +108,19 @@ Return ONLY valid JSON, no markdown code blocks.`;
     if (!response.ok) {
       const error = await response.json();
       console.error("Gemini API error:", error);
-      res.status(500).json({ error: "Failed to analyze image", details: error });
+
+      const errorMessage =
+        error.error?.message ||
+        error.message ||
+        "Failed to analyze image";
+
+      res.status(response.status).json({
+        error: "Failed to analyze image",
+        details: {
+          message: errorMessage,
+          status: error.error?.status || response.status,
+        },
+      });
       return;
     }
 
