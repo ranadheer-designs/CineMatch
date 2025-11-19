@@ -16,6 +16,7 @@ import { AnalysisResponse, GuideResponse } from "@shared/api";
 export default function Analysis() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { apiKey } = useApiKey();
   const [isLoadingGuide, setIsLoadingGuide] = useState(false);
   const analysisData = location.state?.analysis as AnalysisResponse;
 
@@ -36,12 +37,18 @@ export default function Analysis() {
   }
 
   const handleGenerateGuide = async () => {
+    if (!apiKey) {
+      alert("API key is required. Please go back to home and configure it.");
+      navigate("/");
+      return;
+    }
+
     setIsLoadingGuide(true);
     try {
       const response = await fetch("/api/generate-guide", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ analysis: analysisData.analysis }),
+        body: JSON.stringify({ analysis: analysisData.analysis, apiKey }),
       });
 
       if (!response.ok) {
