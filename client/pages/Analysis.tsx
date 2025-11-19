@@ -10,6 +10,7 @@ import {
   Loader2,
 } from "lucide-react";
 import AnalysisSection from "@/components/AnalysisSection";
+import { useApiKey } from "@/hooks/useApiKey";
 import { AnalysisResponse, GuideResponse } from "@shared/api";
 
 export default function Analysis() {
