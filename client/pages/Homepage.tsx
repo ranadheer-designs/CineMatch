@@ -201,6 +201,14 @@ export default function Homepage() {
           </p>
         </div>
       </footer>
+
+      {/* API Key Modal */}
+      <APIKeyModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={setApiKey}
+        currentKey={apiKey}
+      />
     </div>
   );
 }
