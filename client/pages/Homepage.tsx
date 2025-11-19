@@ -30,6 +30,12 @@ export default function Homepage() {
   };
 
   const handleImageSelect = async (imageUrl: string) => {
+    if (!apiKey) {
+      alert("Please configure your Gemini API key first. Click the settings icon above.");
+      setIsModalOpen(true);
+      return;
+    }
+
     setIsLoading(true);
     setMessageIndex(0);
     setLoadingStatus(LOADING_MESSAGES[0]);
@@ -41,7 +47,7 @@ export default function Homepage() {
       const response = await fetch("/api/analyze-shot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageUrl }),
+        body: JSON.stringify({ imageUrl, apiKey }),
       });
 
       if (!response.ok) {
