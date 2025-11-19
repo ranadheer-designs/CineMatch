@@ -13,10 +13,15 @@ interface GoogleGenerativeAIResponse {
 
 export const handleAnalyzeShot: RequestHandler = async (req, res) => {
   try {
-    const { imageUrl } = req.body;
+    const { imageUrl, apiKey } = req.body;
 
     if (!imageUrl) {
       res.status(400).json({ error: "imageUrl is required" });
+      return;
+    }
+
+    if (!apiKey) {
+      res.status(400).json({ error: "apiKey is required" });
       return;
     }
 
