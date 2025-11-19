@@ -96,7 +96,7 @@ Format as markdown with clear headers. Be practical and specific.`;
             maxOutputTokens: 3000,
           },
         }),
-      }
+      },
     );
 
     if (!response.ok) {

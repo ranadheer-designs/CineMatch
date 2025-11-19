@@ -88,7 +88,7 @@ export default function ImageUploader({
             "border-2 border-dashed rounded-lg p-8 transition-all duration-200 cursor-pointer",
             dragActive
               ? "border-primary bg-primary/5"
-              : "border-primary/30 bg-card/30 hover:border-primary/50"
+              : "border-primary/30 bg-card/30 hover:border-primary/50",
           )}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}

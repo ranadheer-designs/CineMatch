@@ -36,7 +36,9 @@ function Guide() {
             <ArrowLeft className="w-5 h-5" />
             <span className="font-semibold">Back</span>
           </button>
-          <h1 className="text-2xl font-bold text-foreground">Recreation Guide</h1>
+          <h1 className="text-2xl font-bold text-foreground">
+            Recreation Guide
+          </h1>
           <div className="w-24"></div>
         </div>
       </header>
@@ -59,7 +61,10 @@ function Guide() {
         )}
 
         {/* Guide content */}
-        <div className="animate-slide-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
+        <div
+          className="animate-slide-up"
+          style={{ animationDelay: "200ms", animationFillMode: "both" }}
+        >
           <div className="rounded-lg border border-primary/20 bg-card/40 backdrop-blur-sm p-8">
             <div className="space-y-4 text-foreground/90">
               <ReactMarkdown
@@ -80,7 +85,9 @@ function Guide() {
                     </h3>
                   ),
                   p: ({ children }) => (
-                    <p className="text-foreground/90 leading-relaxed mb-3">{children}</p>
+                    <p className="text-foreground/90 leading-relaxed mb-3">
+                      {children}
+                    </p>
                   ),
                   ul: ({ children }) => (
                     <ul className="list-disc list-inside text-foreground/90 space-y-2 mb-4">
@@ -96,7 +103,9 @@ function Guide() {
                     <li className="text-foreground/90">{children}</li>
                   ),
                   strong: ({ children }) => (
-                    <strong className="text-primary font-bold">{children}</strong>
+                    <strong className="text-primary font-bold">
+                      {children}
+                    </strong>
                   ),
                   code: ({ children }) => (
                     <code className="bg-background/50 px-2 py-1 rounded text-primary/80 font-mono text-sm">

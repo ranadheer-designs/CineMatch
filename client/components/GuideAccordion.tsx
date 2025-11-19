@@ -39,7 +39,7 @@ export default function GuideAccordion({
             <ChevronDown
               className={cn(
                 "w-5 h-5 text-primary transition-transform duration-300",
-                openIndex === index && "rotate-180"
+                openIndex === index && "rotate-180",
               )}
             />
           </button>

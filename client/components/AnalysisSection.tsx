@@ -27,7 +27,7 @@ export default function AnalysisSection({
       <div
         className={cn(
           "rounded-lg border border-primary/20 bg-card/40 backdrop-blur-sm p-6 hover:border-primary/40 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10",
-          className
+          className,
         )}
       >
         <div className="flex items-center gap-3 mb-4">

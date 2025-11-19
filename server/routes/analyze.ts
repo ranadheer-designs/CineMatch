@@ -101,7 +101,7 @@ Return ONLY valid JSON, no markdown code blocks.`;
             maxOutputTokens: 2000,
           },
         }),
-      }
+      },
     );
 
     if (!response.ok) {
@@ -109,9 +109,7 @@ Return ONLY valid JSON, no markdown code blocks.`;
       console.error("Gemini API error:", error);
 
       const errorMessage =
-        error.error?.message ||
-        error.message ||
-        "Failed to analyze image";
+        error.error?.message || error.message || "Failed to analyze image";
 
       res.status(response.status).json({
         error: "Failed to analyze image",

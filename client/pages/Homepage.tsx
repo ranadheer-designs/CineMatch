@@ -26,12 +26,16 @@ export default function Homepage() {
   // Cycle through loading messages
   const cycleMessages = () => {
     setMessageIndex((prev) => (prev + 1) % LOADING_MESSAGES.length);
-    setLoadingStatus(LOADING_MESSAGES[(messageIndex + 1) % LOADING_MESSAGES.length]);
+    setLoadingStatus(
+      LOADING_MESSAGES[(messageIndex + 1) % LOADING_MESSAGES.length],
+    );
   };
 
   const handleImageSelect = async (imageUrl: string) => {
     if (!apiKey) {
-      alert("Please configure your Gemini API key first. Click the settings icon above.");
+      alert(
+        "Please configure your Gemini API key first. Click the settings icon above.",
+      );
       setIsModalOpen(true);
       return;
     }
@@ -52,11 +56,19 @@ export default function Homepage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        const errorMessage = errorData.details?.message || errorData.details || "Failed to analyze image";
+        const errorMessage =
+          errorData.details?.message ||
+          errorData.details ||
+          "Failed to analyze image";
 
         // Check for rate limiting
-        if (errorMessage.includes("429") || errorMessage.includes("RESOURCE_EXHAUSTED")) {
-          throw new Error("API rate limit reached. Please wait a moment and try again.");
+        if (
+          errorMessage.includes("429") ||
+          errorMessage.includes("RESOURCE_EXHAUSTED")
+        ) {
+          throw new Error(
+            "API rate limit reached. Please wait a moment and try again.",
+          );
         }
 
         throw new Error(errorMessage);
@@ -71,7 +83,8 @@ export default function Homepage() {
     } catch (error) {
       clearInterval(messageInterval);
       setIsLoading(false);
-      const errorMsg = error instanceof Error ? error.message : "Failed to analyze image";
+      const errorMsg =
+        error instanceof Error ? error.message : "Failed to analyze image";
       console.error("Analysis error:", errorMsg);
       alert(`Analysis failed: ${errorMsg}`);
     }
@@ -130,9 +143,9 @@ export default function Homepage() {
             </span>
           </h2>
           <p className="text-lg text-foreground/70 max-w-2xl mx-auto leading-relaxed">
-            Unlock the cinematography secrets of your favorite films. Get detailed
-            analysis of lighting, camera settings, composition, and color grading.
-            Then recreate the magic with our step-by-step guides.
+            Unlock the cinematography secrets of your favorite films. Get
+            detailed analysis of lighting, camera settings, composition, and
+            color grading. Then recreate the magic with our step-by-step guides.
           </p>
 
           {/* Feature highlights */}
@@ -157,7 +170,10 @@ export default function Homepage() {
               <div
                 key={i}
                 className="p-4 rounded-lg border border-primary/20 bg-card/40 backdrop-blur-sm animate-slide-up hover:border-primary/40 transition-all duration-300"
-                style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
+                style={{
+                  animationDelay: `${i * 100}ms`,
+                  animationFillMode: "both",
+                }}
               >
                 <div className="text-primary mb-2 flex justify-center">
                   {feature.icon}
@@ -172,7 +188,10 @@ export default function Homepage() {
         </div>
 
         {/* Upload section */}
-        <div className="animate-slide-up" style={{ animationDelay: "300ms", animationFillMode: "both" }}>
+        <div
+          className="animate-slide-up"
+          style={{ animationDelay: "300ms", animationFillMode: "both" }}
+        >
           <div className="rounded-2xl border border-primary/20 bg-card/50 backdrop-blur-lg p-8 shadow-2xl shadow-primary/10">
             <ImageUploader
               onImageSelect={handleImageSelect}
@@ -196,9 +215,7 @@ export default function Homepage() {
       {/* Footer */}
       <footer className="relative border-t border-primary/10 bg-background/50 backdrop-blur-md mt-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-foreground/60 text-sm">
-          <p>
-            CINEMATCH AI • Powered by Gemini Vision • TMDB Integration
-          </p>
+          <p>CINEMATCH AI • Powered by Gemini Vision • TMDB Integration</p>
         </div>
       </footer>
 

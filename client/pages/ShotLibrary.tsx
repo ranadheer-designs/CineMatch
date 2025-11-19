@@ -26,7 +26,9 @@ export default function ShotLibrary() {
   const fetchMovies = async (query: string) => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/tmdb-shots?query=${encodeURIComponent(query)}`);
+      const response = await fetch(
+        `/api/tmdb-shots?query=${encodeURIComponent(query)}`,
+      );
       if (!response.ok) throw new Error("Failed to fetch movies");
       const data = await response.json();
       setMovies(data.movies || []);
@@ -114,7 +116,14 @@ export default function ShotLibrary() {
         ) : (
           <div className="space-y-12">
             {movies.map((movie, movieIndex) => (
-              <div key={movie.id} className="space-y-4 animate-slide-up" style={{ animationDelay: `${movieIndex * 100}ms`, animationFillMode: "both" }}>
+              <div
+                key={movie.id}
+                className="space-y-4 animate-slide-up"
+                style={{
+                  animationDelay: `${movieIndex * 100}ms`,
+                  animationFillMode: "both",
+                }}
+              >
                 <div className="flex items-center justify-between">
                   <div>
                     <h2 className="text-2xl font-bold text-foreground">

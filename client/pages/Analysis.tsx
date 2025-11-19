@@ -82,7 +82,9 @@ export default function Analysis() {
             <ArrowLeft className="w-5 h-5" />
             <span className="font-semibold">Back</span>
           </button>
-          <h1 className="text-2xl font-bold text-foreground">Analysis Results</h1>
+          <h1 className="text-2xl font-bold text-foreground">
+            Analysis Results
+          </h1>
           <div className="w-24"></div>
         </div>
       </header>
@@ -129,7 +131,9 @@ export default function Analysis() {
               </div>
               {analysis.lighting.backLight && (
                 <div>
-                  <p className="text-sm text-primary font-semibold">Back Light</p>
+                  <p className="text-sm text-primary font-semibold">
+                    Back Light
+                  </p>
                   <p className="text-foreground text-sm">
                     {analysis.lighting.backLight.position}
                   </p>
@@ -146,7 +150,9 @@ export default function Analysis() {
           <AnalysisSection title="Camera Settings" icon={<Camera />} delay={2}>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-primary font-semibold">Focal Length</p>
+                <p className="text-sm text-primary font-semibold">
+                  Focal Length
+                </p>
                 <p className="text-foreground">{analysis.camera.focalLength}</p>
               </div>
               <div>
@@ -161,7 +167,9 @@ export default function Analysis() {
                 <p className="text-sm text-primary font-semibold">
                   Shutter Speed
                 </p>
-                <p className="text-foreground">{analysis.camera.shutterSpeed}</p>
+                <p className="text-foreground">
+                  {analysis.camera.shutterSpeed}
+                </p>
               </div>
               <div className="col-span-2">
                 <p className="text-sm text-primary font-semibold">Movement</p>
@@ -187,7 +195,9 @@ export default function Analysis() {
               </div>
               <div>
                 <p className="text-sm text-primary font-semibold">Symmetry</p>
-                <p className="text-foreground">{analysis.composition.symmetry}</p>
+                <p className="text-foreground">
+                  {analysis.composition.symmetry}
+                </p>
               </div>
               <div>
                 <p className="text-sm text-primary font-semibold">Depth</p>
@@ -197,7 +207,9 @@ export default function Analysis() {
               </div>
               <div>
                 <p className="text-sm text-primary font-semibold">Headroom</p>
-                <p className="text-foreground">{analysis.composition.headroom}</p>
+                <p className="text-foreground">
+                  {analysis.composition.headroom}
+                </p>
               </div>
             </div>
           </AnalysisSection>
@@ -214,17 +226,23 @@ export default function Analysis() {
               <div className="grid grid-cols-2 gap-2">
                 <div>
                   <p className="text-sm text-primary font-semibold">Contrast</p>
-                  <p className="text-foreground">{analysis.colorGrading.contrast}</p>
+                  <p className="text-foreground">
+                    {analysis.colorGrading.contrast}
+                  </p>
                 </div>
                 <div>
-                  <p className="text-sm text-primary font-semibold">Saturation</p>
+                  <p className="text-sm text-primary font-semibold">
+                    Saturation
+                  </p>
                   <p className="text-foreground">
                     {analysis.colorGrading.saturation}
                   </p>
                 </div>
               </div>
               <div>
-                <p className="text-sm text-primary font-semibold">Temperature</p>
+                <p className="text-sm text-primary font-semibold">
+                  Temperature
+                </p>
                 <p className="text-foreground text-sm">
                   {analysis.colorGrading.temperature}
                 </p>
@@ -242,7 +260,9 @@ export default function Analysis() {
           <AnalysisSection title="Vibe & References" icon={<Film />} delay={5}>
             <div className="space-y-3">
               <div>
-                <p className="text-sm text-primary font-semibold">Overall Mood</p>
+                <p className="text-sm text-primary font-semibold">
+                  Overall Mood
+                </p>
                 <p className="text-foreground">{analysis.mood}</p>
               </div>
               <div>
@@ -251,7 +271,9 @@ export default function Analysis() {
               </div>
               {analysis.references.length > 0 && (
                 <div>
-                  <p className="text-sm text-primary font-semibold">References</p>
+                  <p className="text-sm text-primary font-semibold">
+                    References
+                  </p>
                   <ul className="text-foreground text-sm space-y-1">
                     {analysis.references.slice(0, 3).map((ref, i) => (
                       <li key={i} className="flex items-center gap-2">
@@ -266,7 +288,10 @@ export default function Analysis() {
         </div>
 
         {/* CTA Button */}
-        <div className="flex justify-center animate-slide-up" style={{ animationDelay: "600ms", animationFillMode: "both" }}>
+        <div
+          className="flex justify-center animate-slide-up"
+          style={{ animationDelay: "600ms", animationFillMode: "both" }}
+        >
           <button
             onClick={handleGenerateGuide}
             disabled={isLoadingGuide}

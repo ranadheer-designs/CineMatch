@@ -31,8 +31,8 @@ export const handleTMDBShots: RequestHandler = async (req, res) => {
     // Search for movies
     const searchResponse = await fetch(
       `${TMDB_BASE_URL}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(
-        query
-      )}&page=${page}`
+        query,
+      )}&page=${page}`,
     );
     const searchData = (await searchResponse.json()) as TMDBSearchResponse;
 
@@ -41,9 +41,10 @@ export const handleTMDBShots: RequestHandler = async (req, res) => {
       searchData.results.slice(0, 5).map(async (movie) => {
         try {
           const imagesResponse = await fetch(
-            `${TMDB_BASE_URL}/movie/${movie.id}/images?api_key=${TMDB_API_KEY}`
+            `${TMDB_BASE_URL}/movie/${movie.id}/images?api_key=${TMDB_API_KEY}`,
           );
-          const imagesData = (await imagesResponse.json()) as TMDBImagesResponse;
+          const imagesData =
+            (await imagesResponse.json()) as TMDBImagesResponse;
 
           const movieShot: MovieShot = {
             id: movie.id,
@@ -64,11 +65,11 @@ export const handleTMDBShots: RequestHandler = async (req, res) => {
           console.error(`Error fetching images for movie ${movie.id}:`, error);
           return null;
         }
-      })
+      }),
     );
 
     const validMovies = moviesWithImages.filter(
-      (movie) => movie !== null
+      (movie) => movie !== null,
     ) as MovieShot[];
 
     const result: TMDBResponse = {
