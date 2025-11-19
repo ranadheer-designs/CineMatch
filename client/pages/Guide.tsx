@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
-export default function Guide() {
+function Guide() {
   const location = useLocation();
   const navigate = useNavigate();
   const guide = location.state?.guide as string;
@@ -61,59 +61,52 @@ export default function Guide() {
         {/* Guide content */}
         <div className="animate-slide-up" style={{ animationDelay: "200ms", animationFillMode: "both" }}>
           <div className="rounded-lg border border-primary/20 bg-card/40 backdrop-blur-sm p-8">
-            <div className="prose prose-invert max-w-none">
+            <div className="space-y-4 text-foreground/90">
               <ReactMarkdown
                 components={{
-                  h1: ({ node, ...props }) => (
-                    <h1
-                      className="text-3xl font-bold text-foreground mt-8 mb-4 first:mt-0"
-                      {...props}
-                    />
+                  h1: ({ children }) => (
+                    <h1 className="text-3xl font-bold text-foreground mt-8 mb-4 first:mt-0">
+                      {children}
+                    </h1>
                   ),
-                  h2: ({ node, ...props }) => (
-                    <h2
-                      className="text-2xl font-bold text-primary mt-6 mb-3"
-                      {...props}
-                    />
+                  h2: ({ children }) => (
+                    <h2 className="text-2xl font-bold text-primary mt-6 mb-3">
+                      {children}
+                    </h2>
                   ),
-                  h3: ({ node, ...props }) => (
-                    <h3
-                      className="text-xl font-semibold text-foreground mt-4 mb-2"
-                      {...props}
-                    />
+                  h3: ({ children }) => (
+                    <h3 className="text-xl font-semibold text-foreground mt-4 mb-2">
+                      {children}
+                    </h3>
                   ),
-                  p: ({ node, ...props }) => (
-                    <p className="text-foreground/90 leading-relaxed mb-3" {...props} />
+                  p: ({ children }) => (
+                    <p className="text-foreground/90 leading-relaxed mb-3">{children}</p>
                   ),
-                  ul: ({ node, ...props }) => (
-                    <ul
-                      className="list-disc list-inside text-foreground/90 space-y-2 mb-4"
-                      {...props}
-                    />
+                  ul: ({ children }) => (
+                    <ul className="list-disc list-inside text-foreground/90 space-y-2 mb-4">
+                      {children}
+                    </ul>
                   ),
-                  ol: ({ node, ...props }) => (
-                    <ol
-                      className="list-decimal list-inside text-foreground/90 space-y-2 mb-4"
-                      {...props}
-                    />
+                  ol: ({ children }) => (
+                    <ol className="list-decimal list-inside text-foreground/90 space-y-2 mb-4">
+                      {children}
+                    </ol>
                   ),
-                  li: ({ node, ...props }) => (
-                    <li className="text-foreground/90" {...props} />
+                  li: ({ children }) => (
+                    <li className="text-foreground/90">{children}</li>
                   ),
-                  strong: ({ node, ...props }) => (
-                    <strong className="text-primary font-bold" {...props} />
+                  strong: ({ children }) => (
+                    <strong className="text-primary font-bold">{children}</strong>
                   ),
-                  code: ({ node, ...props }) => (
-                    <code
-                      className="bg-background/50 px-2 py-1 rounded text-primary/80 font-mono text-sm"
-                      {...props}
-                    />
+                  code: ({ children }) => (
+                    <code className="bg-background/50 px-2 py-1 rounded text-primary/80 font-mono text-sm">
+                      {children}
+                    </code>
                   ),
-                  blockquote: ({ node, ...props }) => (
-                    <blockquote
-                      className="border-l-4 border-primary pl-4 py-2 italic text-foreground/70"
-                      {...props}
-                    />
+                  blockquote: ({ children }) => (
+                    <blockquote className="border-l-4 border-primary pl-4 py-2 italic text-foreground/70">
+                      {children}
+                    </blockquote>
                   ),
                 }}
               >
@@ -139,3 +132,5 @@ export default function Guide() {
     </div>
   );
 }
+
+export default Guide;
