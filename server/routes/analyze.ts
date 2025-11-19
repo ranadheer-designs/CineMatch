@@ -13,17 +13,24 @@ interface GoogleGenerativeAIResponse {
 
 export const handleAnalyzeShot: RequestHandler = async (req, res) => {
   try {
-    const { imageUrl, apiKey } = req.body;
+    const { imageUrl, apiKey } =} = req.body;
+    
+    // Get API key from environment variable
+    const apiKey = process.env.GEMINI_API_KEY;
+  
+    if (!apiKey) {
+      res.status(500).json({ 
+        error: "Server configuration error", 
+        details: "GEMINI_API_KEY environment variable not set" 
+      });
+      return;
+    }
 
     if (!imageUrl) {
       res.status(400).json({ error: "imageUrl is required" });
       return;
     }
 
-    if (!apiKey) {
-      res.status(400).json({ error: "apiKey is required" });
-      return;
-    }
 
     // Fetch image and convert to base64
     const imageResponse = await fetch(imageUrl);
